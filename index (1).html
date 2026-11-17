@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffeff2">
+  <meta name="description" content="A slightly over-engineered invitation to an actual date. A little 444, a few inside jokes, and a plan made just for you.">
+  <title>Operation 444 💌 — One Actual Date?</title>
+  <style>
+    :root {
+      --ink:#35253a; --muted:#756777; --pink:#fc68ad; --rose:#ffb8d4;
+      --cream:#fff8ef; --gold:#c99533; --lemon:#ffe59b; --blue:#9ee3ef;
+      --line:rgba(77,43,67,.15); --white:#fffefb; --shadow:0 20px 65px rgba(102,60,88,.13);
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;min-height:100vh;color:var(--ink);font-family:Trebuchet MS,Arial,sans-serif;background:#fff3f5;overflow-x:hidden}
+    button,input,textarea{font:inherit} button{cursor:pointer} button:disabled{cursor:not-allowed;opacity:.5}
+    button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #a24dd8;outline-offset:3px}
+    .hidden,[hidden]{display:none!important} .shell{max-width:1160px;margin:0 auto;padding:0 25px}
+    .sky{position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(circle at 9% 12%,#ffe8a2aa 0,transparent 26%),radial-gradient(circle at 89% 22%,#acecf5a6 0,transparent 28%),radial-gradient(circle at 50% 93%,#ffc7dfbd 0,transparent 29%),linear-gradient(145deg,#fffaf4,#fff2f8 66%,#f1ffff)}
+    .sky:after{content:"";position:absolute;inset:0;background-image:radial-gradient(#bf8a8d37 1px,transparent 1px);background-size:21px 21px;opacity:.35}
+    .ribbon{background:#35253a;color:#fff5d7;text-align:center;padding:9px 12px;font-size:11px;letter-spacing:2.2px;font-weight:800}
+    header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:24px;padding-bottom:14px}
+    .brand{font-weight:1000;letter-spacing:-1.8px;font-size:23px;line-height:1;display:flex;align-items:center;gap:8px}.brand-mark{display:grid;place-items:center;background:var(--gold);color:#fff;border-radius:11px;transform:rotate(-8deg);padding:9px;font-size:14px;letter-spacing:-.3px}
+    .header-right{display:flex;align-items:center;gap:10px}.mini-pill,.sound-btn{border:1.5px solid var(--line);border-radius:999px;background:#fff9;padding:10px 13px;font-size:11px;font-weight:900;letter-spacing:.8px;white-space:nowrap}
+    .sound-btn:hover{background:#fff}.tiny-print{font-size:12px;color:var(--muted)}
+    .screen{animation:enter .46s ease both}.hero{min-height:min(740px,calc(100svh - 120px));display:grid;grid-template-columns:1.12fr .88fr;align-items:center;gap:42px;padding:38px 0 52px}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;background:#fff;box-shadow:0 6px 25px #eec6da4a;border:1px solid #f6d1e0;padding:10px 15px;border-radius:30px;font-size:12px;font-weight:900;letter-spacing:1.4px;text-transform:uppercase}
+    .twinkle{color:var(--gold)} h1,h2,h3,p{margin-top:0} h1,h2,.display{font-family:Georgia,'Times New Roman',serif}
+    h1{font-size:clamp(48px,6.2vw,90px);line-height:1.04;letter-spacing:-3.9px;margin:22px 0}
+    h1 em{color:#dc408e;font-weight:normal;position:relative} h1 em:after{content:"";position:absolute;height:9px;width:101%;bottom:0;left:0;background:#ffe185;z-index:-1;border-radius:100%;transform:rotate(-3deg)}
+    .lead{max-width:535px;color:#625365;font-size:17px;line-height:1.8}.lead strong{color:var(--ink)}
+    .question{margin:24px 0 22px;font-size:clamp(22px,2.8vw,32px);font-family:Georgia,serif;line-height:1.3;font-weight:700}
+    .answers{display:flex;flex-wrap:wrap;align-items:center;gap:16px;min-height:95px;position:relative;isolation:isolate}
+    .btn{border:0;border-radius:18px;padding:17px 26px;font-weight:1000;font-size:14px;letter-spacing:.2px;transition:transform .2s,box-shadow .2s,background .2s;box-shadow:0 8px 0 #35253a12}
+    .btn:hover{box-shadow:0 11px 25px #7d476d30}.btn-pink{background:var(--pink);color:#321f36}.btn-dark{background:var(--ink);color:#fff}.btn-white{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+    #yesBtn{--yes-scale:1;transform:scale(var(--yes-scale));transform-origin:left center;z-index:2;min-width:195px;box-shadow:0 8px 0 #ca38865c,0 12px 30px #ef6eaf42}
+    #noBtn{position:relative;background:#fff;z-index:9;border:2px solid #ddd0da;box-shadow:0 6px 16px #aa8b9c27;touch-action:none;white-space:nowrap}
+    .little-out{font-size:12px;color:#827181;line-height:1.7;margin-top:17px;max-width:495px}.text-link{border:0;background:transparent;text-decoration:underline;text-underline-offset:3px;font-size:inherit;color:#6f4e74;padding:2px;font-weight:700}
+    .scrapbook{min-height:525px;position:relative;max-width:470px;width:100%;margin:auto;isolation:isolate}
+    .blob{position:absolute;inset:35px 10px 20px 20px;border-radius:46% 54% 59% 41% / 42% 39% 61% 58%;transform:rotate(-8deg);background:radial-gradient(circle at 28% 25%,#ffedbe,transparent 50%),linear-gradient(130deg,#f9adc9,#fb82aa 65%,#ffdf90);box-shadow:inset 9px 12px 40px #fff5,0 32px 55px #ef92b13d}
+    .leopard{background-color:#f7d69a;background-image:radial-gradient(ellipse 11px 6px at 17% 25%,#4c3741 75%,transparent 80%),radial-gradient(ellipse 9px 15px at 55% 60%,#4c3741 60%,transparent 65%),radial-gradient(ellipse 14px 7px at 84% 14%,#4c3741 65%,transparent 70%),radial-gradient(ellipse 10px 10px at 32% 80%,#4c3741 65%,transparent 72%);background-size:83px 82px}
+    .leopard-strip{position:absolute;top:18px;right:14px;width:112px;height:100px;border-radius:50%;transform:rotate(20deg);border:7px solid #fff8;box-shadow:0 6px 20px #46313a25}
+    .polaroid{position:absolute;background:#fffefb;padding:10px 10px 18px;box-shadow:0 20px 35px #5a2e5240;border:1px solid #f2e5e9;transition:transform .3s}
+    .polaroid:hover{transform:rotate(0deg) translateY(-8px)}.photo{height:160px;display:grid;place-items:center;font-size:74px;position:relative;overflow:hidden}
+    .photo small{position:absolute;bottom:7px;right:8px;font-size:10px;font-weight:900;letter-spacing:1.5px;background:#fff9;padding:4px 7px;border-radius:100px}
+    .polaroid .cap{text-align:center;margin-top:12px;font-family:Georgia,serif;font-size:15px;font-style:italic;font-weight:700}
+    .p1{width:215px;top:45px;left:6px;transform:rotate(-12deg);z-index:2}.p1 .photo{background:linear-gradient(145deg,#ffe3a0,#ff9f80)}
+    .p2{width:225px;top:150px;right:0;transform:rotate(9deg);z-index:3}.p2 .photo{background:linear-gradient(145deg,#a6e9f2,#99bcd9)}
+    .p3{width:204px;bottom:3px;left:36px;transform:rotate(4deg);z-index:4}.p3 .photo{height:133px;background:linear-gradient(135deg,#ffd3e4,#eed4f7);font-size:62px}
+    .star-sticker{position:absolute;top:10px;left:48%;font-family:Georgia,serif;font-size:33px;color:#fff;text-shadow:2px 3px 0 #9a633b;z-index:5;transform:rotate(10deg)}
+    .star-sticker span{display:block;font:900 11px Trebuchet MS,Arial,sans-serif;letter-spacing:1px;text-shadow:none;color:#734435;background:#ffea99;border:2px solid #fff;padding:6px 10px;border-radius:20px}
+    .sticker-note{position:absolute;bottom:47px;right:0;max-width:175px;z-index:5;background:#fff29c;padding:17px;border-radius:5px;transform:rotate(-8deg);font:italic 16px Georgia,serif;box-shadow:5px 10px 25px #5b393a38}.sticker-note:before{content:"";position:absolute;top:-7px;left:28%;background:#ffffff99;width:63px;height:17px;transform:rotate(8deg)}
+    .foot{border-top:1px solid var(--line);font-size:12px;color:#8a7381;display:flex;justify-content:space-between;gap:12px;padding:19px 0 28px}
+    .planner-wrap{max-width:930px;margin:30px auto 85px}.panel{border:2px solid #f6e3e7;border-radius:32px;background:#fffdfaf5;box-shadow:var(--shadow);overflow:hidden}
+    .panel-top{padding:29px 34px 20px;background:linear-gradient(115deg,#fff0f6,#f0fbfb);border-bottom:1px solid #efdfe6}
+    .kicker{text-transform:uppercase;letter-spacing:2.1px;font-size:11px;font-weight:1000;color:#ad5688}.panel h2{margin:8px 0;font-size:clamp(32px,4vw,47px);letter-spacing:-1.7px;line-height:1.13}.panel .sub{margin:8px 0 0;color:var(--muted);font-size:14px;line-height:1.6}
+    .step-track{display:flex;gap:7px;margin-top:20px}.track-piece{height:7px;flex:1;background:#e9dce4;border-radius:99px}.track-piece.active{background:linear-gradient(90deg,#dca14a,#f978ac)}
+    .panel-content{padding:30px 34px;min-height:360px}.section-title{font-size:17px;font-weight:1000;margin:0 0 15px}.field-label{display:block;margin:0 0 9px;font-size:13px;font-weight:900}
+    .date-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:end}.input{width:100%;border:1.5px solid #dfccd6;border-radius:14px;padding:15px;background:#fff;color:var(--ink);min-height:54px}
+    .choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.choice-grid.food{grid-template-columns:repeat(4,minmax(0,1fr))}.choice-grid.concepts{grid-template-columns:repeat(2,minmax(0,1fr))}.choice-grid.extras{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .choice{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:8px;min-height:125px;border:1.7px solid #e9d7df;border-radius:18px;background:#fff;padding:15px;color:var(--ink);transition:transform .18s,border-color .18s,box-shadow .18s;position:relative}
+    .choice:hover{transform:translateY(-3px);box-shadow:0 12px 20px #b09eac26}.choice[aria-pressed="true"]{border-color:#e35697;background:#fff0f7;box-shadow:inset 0 0 0 1px #e35697,0 6px 16px #e3569723}
+    .choice[aria-pressed="true"]:after{content:"✓";position:absolute;right:11px;top:10px;background:var(--pink);color:var(--ink);width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:14px;font-weight:900}
+    .choice .emoji{font-size:32px;line-height:1}.choice .name{font-size:13px;font-weight:1000;line-height:1.3}.choice .hint{font-size:11px;line-height:1.45;color:#806e7d}
+    .helper{font-size:13px;color:#897687;line-height:1.55;margin:0 0 18px}.group-gap{margin-top:25px}.note{min-height:100px;resize:vertical;line-height:1.6}
+    .panel-nav{border-top:1px solid #f0e5e9;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:22px 34px;background:#fffafb}.error{color:#bb2f5e;font-weight:800;font-size:13px;margin:0;flex:1;text-align:center}
+    .panel-nav .btn{padding:14px 21px}.step-counter{font-size:12px;font-weight:900;letter-spacing:1px;color:#9a7e8f}
+    .ticket-section{max-width:950px;margin:26px auto 70px}.ticket-intro{text-align:center;margin:25px auto 25px}.ticket-intro h2{font-size:clamp(37px,5.3vw,60px);line-height:1.1;letter-spacing:-2.3px;margin:10px 0}.ticket-intro p{color:#7d6b79;font-size:14px;line-height:1.6}
+    .ticket{display:grid;grid-template-columns:minmax(0,1fr) 235px;filter:drop-shadow(0 25px 30px #72486a25);background:var(--white);border:2px solid #dca751;border-radius:23px;overflow:hidden}
+    .ticket-left{padding:30px 31px;position:relative;background:linear-gradient(135deg,#fffaf1,#fff7f5 65%,#fffbeb)}
+    .ticket-left:before{content:"";position:absolute;width:155px;height:155px;border:17px solid #e9cc8430;border-radius:50%;top:18px;right:20px}
+    .ticket-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding-bottom:23px;border-bottom:1px dashed #caaf8d;position:relative;z-index:1}
+    .ticket-heading h3{font-size:29px;font-family:Georgia,serif;margin:8px 0 0;letter-spacing:-1.1px}.serial{letter-spacing:1px;color:#976d38;font-size:11px;font-weight:900;text-align:right;line-height:1.6}
+    .ticket-data{display:grid;grid-template-columns:1fr 1fr;gap:21px 16px;padding:24px 0 17px;position:relative;z-index:1}.ticket-field.wide{grid-column:1/-1}.ticket-label{text-transform:uppercase;letter-spacing:1.6px;color:#947c76;font-size:10px;font-weight:900;margin:0 0 7px}.ticket-value{margin:0;font-size:15px;line-height:1.55;font-weight:800;overflow-wrap:anywhere}.ticket-value.note-value{font-weight:500;font-style:italic}
+    .ticket-stamp{display:inline-block;margin-top:11px;border:3px double #c78a47;border-radius:7px;color:#9b672d;font-size:13px;font-weight:1000;letter-spacing:1px;transform:rotate(-2deg);padding:9px 13px}
+    .ticket-right{border-left:2px dashed #ceae81;position:relative;background:linear-gradient(148deg,#ffe3a0,#ffebca 45%,#f9cbda);padding:26px 22px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;text-align:center}
+    .ticket-right:before,.ticket-right:after{content:"";height:26px;width:26px;background:#fff3f5;position:absolute;border:2px solid #dca751;border-radius:50%;left:-15px}.ticket-right:before{top:-15px}.ticket-right:after{bottom:-15px}
+    .ticket-444{font:900 66px Georgia,serif;letter-spacing:-7px;line-height:1;color:#96651d}.ticket-mini{font-size:11px;letter-spacing:2px;font-weight:1000;line-height:1.65}.barcode{width:100%;height:73px;background:repeating-linear-gradient(90deg,#3c3037 0 2px,transparent 2px 4px,#3c3037 4px 5px,transparent 5px 9px,#3c3037 9px 12px,transparent 12px 16px);opacity:.85}.ticket-fine{font-size:10px;color:#6d5e5f;line-height:1.5}
+    .ticket-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin:27px 0 11px}.ticket-actions .btn{min-width:185px}.ticket-disclaimer{text-align:center;max-width:640px;color:#846e7f;font-size:12px;line-height:1.7;margin:10px auto}
+    .decline-box{background:#fffefa;border:2px solid #f1d3db;border-radius:30px;padding:45px;max-width:680px;text-align:center;margin:65px auto 95px;box-shadow:var(--shadow)}
+    .decline-box .big-emoji{font-size:60px}.decline-box h2{font-size:39px;margin:14px 0}.decline-box p{color:#776777;line-height:1.7}
+    #confetti{position:fixed;inset:0;pointer-events:none;z-index:99}.heart-float{position:fixed;bottom:-35px;z-index:98;pointer-events:none;font-size:28px;animation:heartFlight 3.3s ease-out forwards}
+    @keyframes heartFlight{to{transform:translate(var(--drift),-110vh) rotate(45deg);opacity:0}}@keyframes enter{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    @media(max-width:810px){.hero{grid-template-columns:1fr;gap:3px;padding-top:30px}.scrapbook{margin-top:10px}.panel-content,.panel-top,.panel-nav{padding-left:22px;padding-right:22px}.choice-grid.food{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:560px){.shell{padding:0 17px}.ribbon{font-size:9px;letter-spacing:1.1px}.brand{font-size:19px}.header-right .mini-pill{display:none}.hero{padding-top:25px;min-height:auto}.hero h1{font-size:clamp(44px,11.4vw,65px);letter-spacing:-2.9px}.lead{font-size:15px}.question{font-size:25px}.btn{padding:15px 19px}.answers{gap:12px}#yesBtn{min-width:175px}.scrapbook{min-height:390px;max-width:360px}.blob{inset:25px 8px 12px}.p1{width:173px;left:0;top:37px}.p2{width:175px;top:118px;right:0}.p3{width:160px;bottom:4px;left:30px}.photo{height:119px;font-size:52px}.p3 .photo{height:88px;font-size:48px}.polaroid .cap{font-size:12px;margin-top:8px}.sticker-note{right:0;bottom:12px;font-size:12px;max-width:130px;padding:11px}.leopard-strip{width:90px;height:90px}.star-sticker{top:6px;font-size:27px}.foot{flex-direction:column;gap:4px}.planner-wrap{margin:12px auto 35px}.panel{border-radius:24px}.panel h2{font-size:33px}.panel-content{padding:21px 16px;min-height:340px}.panel-top,.panel-nav{padding-left:17px;padding-right:17px}.choice-grid,.choice-grid.food,.choice-grid.concepts,.choice-grid.extras{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.choice{min-height:115px;padding:12px}.date-grid{grid-template-columns:1fr;gap:14px}.panel-nav{justify-content:space-between}.panel-nav .btn{padding:13px 15px}.error{order:3;flex-basis:100%;text-align:left}.ticket{grid-template-columns:1fr}.ticket-left{padding:22px 18px}.ticket-heading h3{font-size:23px}.ticket-data{gap:17px 10px}.ticket-right{border-left:0;border-top:2px dashed #ceae81;min-height:160px;display:grid;grid-template-columns:1fr 2fr;gap:6px;padding:18px}.ticket-right:before,.ticket-right:after{left:auto;top:-14px}.ticket-right:before{left:-14px}.ticket-right:after{right:-14px}.ticket-444{font-size:48px;letter-spacing:-4px}.barcode{height:45px}.ticket-mini{font-size:9px}.ticket-fine{grid-column:1/-1}.decline-box{padding:30px 18px}.decline-box h2{font-size:32px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+    @media print{.ribbon,header,.foot,.ticket-actions,.ticket-intro,.ticket-disclaimer,.sky,#confetti{display:none!important}body{background:white}.shell{max-width:none;padding:0}.screen:not(#ticketScreen){display:none!important}#ticketScreen{display:block!important}.ticket-section{margin:0;max-width:none}.ticket{box-shadow:none;filter:none;break-inside:avoid;print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+  </style>
+</head>
+<body>
+  <div class="sky" aria-hidden="true"></div>
+  <canvas id="confetti" aria-hidden="true"></canvas>
+  <div class="ribbon">✦ OPERATION 444 ✦ A VERY OFFICIAL (NOT REALLY) INVITATION ✦</div>
+  <header class="shell">
+    <div class="brand"><span class="brand-mark">444</span> OPERATION: DATE</div>
+    <div class="header-right"><span class="mini-pill">✦ CLASSIFIED: POSSIBLE DATE</span><button class="sound-btn" id="soundBtn" type="button" aria-pressed="true">🔊 Sound on</button></div>
+  </header>
+  <main class="shell">
+    <section id="proposalScreen" class="screen" aria-labelledby="mainHeading">
+      <div class="hero">
+        <div>
+          <span class="eyebrow"><span class="twinkle">✦</span> One slightly over-engineered question</span>
+          <h1 id="mainHeading">Okay, so...<br><em>one question.</em></h1>
+          <p class="lead">Somehow a <strong>Teen Wolf</strong> marathon turned into breakfast, the <strong>aquarium</strong> became a whole unhurried day, and you remembered I needed a tiny giraffe after moving. <strong>I really like spending time with you.</strong> So I have a proposition...</p>
+          <div class="question">Will you go on an actual date with me? 💌</div>
+          <div class="answers">
+            <button id="yesBtn" class="btn btn-pink" type="button">YES, LET'S GO 💗</button>
+            <button id="noBtn" class="btn" type="button">no 🙄</button>
+          </div>
+          <p class="little-out" id="noComment" aria-live="polite">P.S. One of these buttons has absolutely no chill.</p>
+          <p class="little-out">The real answer is always yours. <button class="text-link" id="realNoBtn" type="button">Not feeling it? You can say no here.</button></p>
+        </div>
+        <div class="scrapbook" aria-label="Little memories: her orange cat in the shark onesie, her light-blue car with leopard print, and the tiny giraffe she gifted">
+          <div class="blob"></div><div class="leopard leopard-strip"></div>
+          <div class="star-sticker">✦<span>444 ENERGY</span></div>
+          <div class="polaroid p1"><div class="photo"><span aria-hidden="true">🐈 🦈</span><small>THE HOOD INCIDENT</small></div><div class="cap">an orange cat in a shark onesie</div></div>
+          <div class="polaroid p2"><div class="photo"><span aria-hidden="true">🚙 🐆</span><small>BLUE HYUNDAI</small></div><div class="cap">leopard-print steering wheel era</div></div>
+          <div class="polaroid p3"><div class="photo"><span aria-hidden="true">🦒 ✨</span><small>TINY BUT MIGHTY</small></div><div class="cap">the little giraffe surprise</div></div>
+          <div class="sticker-note">you notice the little things. it shows. 💛</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="plannerScreen" class="screen planner-wrap" aria-label="Plan our dream date" hidden>
+      <div class="panel">
+        <div class="panel-top">
+          <div class="kicker" id="stepEyebrow">Your date, your rules</div>
+          <h2 id="stepHeading">Let's make a plan ✨</h2>
+          <p class="sub" id="stepSubhead">It's your adventure to design.</p>
+          <div class="step-track" id="stepTrack" aria-label="Step 1 of 4"><span class="track-piece active"></span><span class="track-piece"></span><span class="track-piece"></span><span class="track-piece"></span></div>
+        </div>
+        <div id="stepContent" class="panel-content"></div>
+        <div class="panel-nav">
+          <button id="backBtn" class="btn btn-white" type="button">← Back</button>
+          <span id="errorMessage" class="error" role="alert"></span>
+          <span id="stepCounter" class="step-counter">01 / 04</span>
+          <button id="nextBtn" class="btn btn-dark" type="button">Continue →</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="ticketScreen" class="screen ticket-section" aria-label="Your date ticket" hidden>
+      <div class="ticket-intro"><div class="eyebrow">✦ 444 • Mission accepted</div><h2>IT'S A DATE! 🎉</h2><p>Apparently our next adventure gets an itinerary now. Very professional of us.</p></div>
+      <div id="ticket" class="ticket" aria-label="Official date boarding pass">
+        <div class="ticket-left">
+          <div class="ticket-heading"><div><div class="kicker">First class • professionally unserious</div><h3>Official Date Pass 💌</h3></div><div class="serial">FLIGHT 444<br>ONE GOOD PLAN</div></div>
+          <div class="ticket-data">
+            <div class="ticket-field"><p class="ticket-label">The day</p><p class="ticket-value" id="ticketDate"></p></div>
+            <div class="ticket-field"><p class="ticket-label">Roughly when</p><p class="ticket-value" id="ticketTime"></p></div>
+            <div class="ticket-field wide"><p class="ticket-label">The main event</p><p class="ticket-value" id="ticketMain"></p></div>
+            <div class="ticket-field wide"><p class="ticket-label">The food situation</p><p class="ticket-value" id="ticketFood"></p></div>
+            <div class="ticket-field wide"><p class="ticket-label">Potential side quests</p><p class="ticket-value" id="ticketActivities"></p></div>
+            <div class="ticket-field wide"><p class="ticket-label">Little extras</p><p class="ticket-value" id="ticketExtras"></p></div>
+            <div class="ticket-field wide"><p class="ticket-label">A note from you</p><p class="ticket-value note-value" id="ticketNote"></p></div>
+          </div><div class="ticket-stamp">ACCEPTED & NON-REFUNDABLE ❤️</div>
+        </div>
+        <div class="ticket-right"><div><div class="ticket-444">444</div><div class="ticket-mini">LUCKY NUMBER<br>LUCKY DATE</div></div><div class="barcode" role="img" aria-label="Decorative boarding pass barcode"></div><div class="ticket-fine">♥ OFFICIALLY UNOFFICIAL ♥<br>Valid for one very good time. Everything is adjustable.</div></div>
+      </div>
+      <div class="ticket-actions">
+        <button id="whatsappBtn" class="btn btn-pink" type="button">Send our plan on WhatsApp 💬</button>
+        <button id="printBtn" class="btn btn-white" type="button">Save / print ticket 🎟️</button>
+        <button id="editBtn" class="btn btn-white" type="button">Edit choices ✏️</button>
+      </div>
+      <p class="ticket-disclaimer">The “non-refundable” stamp is a joke, promise. You can always change plans. WhatsApp opens with a message ready to review — nothing sends without you tapping Send.</p>
+    </section>
+
+    <section id="declineScreen" class="screen" hidden>
+      <div class="decline-box"><div class="big-emoji">💛✨</div><h2>Absolutely no pressure.</h2><p>No awkwardness, no hard feelings. I still think you're pretty great, and I'm glad we know each other. 💛</p><button id="resetBtn" type="button" class="btn btn-white">Go back to the invitation ↩</button></div>
+    </section>
+  </main>
+  <footer class="shell foot"><span>Made with 444% effort and at least one terrible joke ✨</span><span>For someone who notices the little things. 💛</span></footer>
+<script>
+(() => {
+  'use strict';
+  // EDIT HERE if you ever want a different WhatsApp destination.
+  const WHATSAPP_NUMBER = '8801734738311'; // +8801734738311, without '+'
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = id => document.getElementById(id);
+  const screens = ['proposalScreen','plannerScreen','ticketScreen','declineScreen'];
+  const data = { date:'', vibe:'', time:'', food:[], activities:[], extras:[], note:'' };
+  let step = 0, dodges = 0, lastDodge = 0, soundOn = true;
+  // Main-date concepts (one selection). Times are suggestions, never commitments.
+  const vibes = [
+    {id:'drive',icon:'🚙',name:'Your-town tour + snacks',hint:'I take the train; you show me around if you fancy playing tour guide.',time:'19:00'},
+    {id:'lego',icon:'🧱',name:'LEGO date',hint:'Pick sets, find somewhere cosy and build. Competitive brick energy.',time:'13:00'},
+    {id:'arcadeaxe',icon:'🕹️',name:'Arcade → axe throwing',hint:'Ticket games, ridiculous challenges, then a supervised throwing session.',time:'15:00'},
+    {id:'art',icon:'🎨',name:'Paint-date era',hint:'An art studio, or paint-by-numbers at home. Your creative comeback.',time:'14:00'},
+    {id:'games',icon:'🎮',name:'Video-game showdown',hint:'COD, Just Dance, Mario Kart, Switch Sports. Friendly-ish rivalry.',time:'17:00'},
+    {id:'bakeoff',icon:'🧁',name:'Bake Off challenge',hint:'London baking experience or kitchen battle. Gordon Ramsay voices mandatory.',time:'14:30'},
+    {id:'laser',icon:'🔫',name:'Laser-tag chaos',hint:'A dramatic rivalry, with an extremely unserious scoreboard.',time:'16:00'},
+    {id:'kart',icon:'🏎️',name:'Go-kart grand prix',hint:'Winner gets bragging rights. Loser can demand a rematch.',time:'13:30'}
+  ];
+  // No seafood/fish, pizza or burgers. A few safe guesses beyond the proven carbonara hit.
+  const foods = [
+    {id:'carbonara',icon:'🍝',name:'Carbonara comeback',hint:'Two successful orders. A proven champion.'},
+    {id:'italian',icon:'🍽️',name:'Italian dinner',hint:'A lovely trattoria, zero pizza required.'},
+    {id:'indian',icon:'🍛',name:'Indian feast',hint:'Curry, naan, and excellent life choices.'},
+    {id:'thai',icon:'🌶️',name:'Thai food',hint:'A tiny callback to your Thailand chapter.'},
+    {id:'mezze',icon:'🫒',name:'Mediterranean plates',hint:'Lots of little things to try together.'},
+    {id:'steak',icon:'🥩',name:'Steak & sides',hint:'Something a bit dressier, if that sounds good.'},
+    {id:'cooking',icon:'👩‍🍳',name:'Cook together',hint:'Only one of us is allowed to shout “IT’S RAW!”'},
+    {id:'brunch',icon:'🥞',name:'Brunch',hint:'Good conversation, something warm, no rush.'},
+    {id:'treat',icon:'🍰',name:'Tiramisu / a sweet treat',hint:'Dessert deserves its own campaign.'},
+    {id:'wildcard',icon:'🎲',name:'Restaurant wildcard',hint:'We find something new. You get unlimited veto power.'}
+  ];
+  // Optional side quests (up to three). Keep only the user's selected ideas + cosy epilogue.
+  const activities = [
+    {id:'pottery',icon:'🎨',name:'Pottery / art studio',hint:'Your creativity deserves a proper outing.'},
+    {id:'scenic',icon:'🚙',name:'Scenic drive + detour',hint:'Good music, no racing a clock.'},
+    {id:'arcade',icon:'🕹️',name:'Arcade rematch',hint:'Tickets, challenges, questionable sportsmanship.'},
+    {id:'escape',icon:'🧩',name:'Supernatural escape room',hint:'Time to put those TV survival skills to work.'},
+    {id:'fair',icon:'🎡',name:'Theme park / funfair',hint:'Rides, laughter, and dramatic reactions.'},
+    {id:'gaming',icon:'🎮',name:'Gaming night',hint:'Sims 4, COD or couch co-op. Your call.'},
+    {id:'trip',icon:'🧳',name:'Mystery day trip',hint:'A new place, a loose plan, and room to wander.'},
+    {id:'minigolf',icon:'⛳',name:'Mini golf',hint:'Loser handles dessert. I did not make the rules.'},
+    {id:'teenwolf',icon:'🐺',name:'Cosy Teen Wolf finale',hint:'Dinner, a sofa, and our extremely serious research.'}
+  ];
+  // No imposed dress code. Extras are optional and can be mixed and matched.
+  const extras = [
+    {id:'playlist',icon:'🎶',name:'You control the playlist',hint:'I accept the aux-cord hierarchy.'},
+    {id:'spontaneous',icon:'🧭',name:'Leave room to improvise',hint:'Plans are nice. Plot twists are nicer.'},
+    {id:'photos',icon:'📸',name:'Photo evidence',hint:'A few photos of us, not just sneaky candids of me.'},
+    {id:'dessert',icon:'🍰',name:'Dessert detour',hint:'The side quest that deserves main-character billing.'},
+    {id:'slow',icon:'🕰️',name:'No rushing',hint:'Like the aquarium day. We take our time.'},
+    {id:'surprise',icon:'🎁',name:'One small surprise',hint:'I plan a little extra. You retain veto power.'},
+    {id:'cozy',icon:'🧸',name:'Cozy ending',hint:'A film, a chat, or just something low-key.'},
+    {id:'wild',icon:'🎲',name:'You decide on the day',hint:'Spontaneity: the official agenda.'}
+  ];
+  const headings = [
+    ['01 • Pick the plot','What kind of date sounds fun? 📅','Choose a day, roughly when, and one main event. All plans are flexible.'],
+    ['02 • The food situation','Okay, now the important bit 🍝','Pick one or two. Carbonara has a suspiciously good track record.'],
+    ['03 • Bonus chapters','Any side quests? ✨','These are optional. A whole date does not need twelve activities.'],
+    ['04 • Your rules','A few final plot twists 💌','No dress code, no weird rules. Just any little extras you’d enjoy.']
+  ];
+  function show(id){
+    screens.forEach(s=>$(s).hidden=s!==id);
+    if(id!=='proposalScreen'){
+      const no=$('noBtn'); document.querySelector('.answers').appendChild(no);
+      no.style.position='relative'; no.style.left=''; no.style.top='';
+    }
+    window.scrollTo({top:0,behavior:reducedMotion?'instant':'smooth'});
+  }
+  function localToday(){
+    const now=new Date(), y=now.getFullYear(), m=String(now.getMonth()+1).padStart(2,'0'), d=String(now.getDate()).padStart(2,'0');
+    return `${y}-${m}-${d}`;
+  }
+  function niceDate(date){
+    if(!date)return 'To be decided';
+    const d=new Date(`${date}T12:00:00`);
+    return Number.isNaN(d.getTime())?date:new Intl.DateTimeFormat('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(d);
+  }
+  function item(id, collection){return collection.find(x=>x.id===id);}
+  function optionCard(x, kind, selected){
+    return `<button class="choice" type="button" data-kind="${kind}" data-id="${x.id}" aria-pressed="${selected}" aria-label="${x.name}"><span class="emoji" aria-hidden="true">${x.icon}</span><span class="name">${x.name}</span><span class="hint">${x.hint}</span></button>`;
+  }
+  function render(){
+    const [eye,title,sub]=headings[step];
+    $('stepEyebrow').textContent=eye; $('stepHeading').textContent=title; $('stepSubhead').textContent=sub;
+    $('stepCounter').textContent=`0${step+1} / 04`; $('stepTrack').setAttribute('aria-label',`Step ${step+1} of 4`);
+    $('stepTrack').innerHTML=Array.from({length:4},(_,i)=>`<span class="track-piece ${i<=step?'active':''}"></span>`).join('');
+    $('nextBtn').textContent=step===3?'Reveal my ticket 🎟️':'Continue →'; $('errorMessage').textContent='';
+    if(step===0){
+      $('stepContent').innerHTML=`<div class="date-grid"><div><label class="field-label" for="dateInput">Choose a day 💌</label><input class="input" id="dateInput" type="date" required></div><div><label class="field-label" for="timeInput">Rough time (totally adjustable) 🕒</label><input class="input" id="timeInput" type="time"></div></div><div class="group-gap"><p class="section-title">Pick our main event (one) 🎟️</p><div class="choice-grid concepts">${vibes.map(x=>optionCard(x,'vibe',data.vibe===x.id)).join('')}</div></div><p class="helper group-gap">The clock time is only a suggestion, and nothing is booked yet. We can work out trains, travel and locations together.</p>`;
+      $('dateInput').min=localToday(); $('dateInput').value=data.date; $('timeInput').value=data.time;
+      $('dateInput').addEventListener('change',e=>{data.date=e.target.value;clearError();});
+      $('timeInput').addEventListener('change',e=>{data.time=e.target.value;clearError();});
+    }else if(step===1){
+      $('stepContent').innerHTML=`<p class="helper">Pick one or two menu options • ${data.food.length}/2 selected</p><div class="choice-grid food">${foods.map(x=>optionCard(x,'food',data.food.includes(x.id))).join('')}</div>`;
+    }else if(step===2){
+      $('stepContent').innerHTML=`<p class="helper">Optional add-ons (up to three) • ${data.activities.length}/3 selected. Picking none is fine!</p><div class="choice-grid">${activities.map(x=>optionCard(x,'activities',data.activities.includes(x.id))).join('')}</div>`;
+    }else{
+      $('stepContent').innerHTML=`<p class="helper">Add any little extras you want (up to three) • ${data.extras.length}/3 selected. Or skip this bit entirely.</p><div class="choice-grid extras">${extras.map(x=>optionCard(x,'extras',data.extras.includes(x.id))).join('')}</div><div class="group-gap"><label class="field-label" for="noteInput">Any requests, boundaries, or messages for me? (optional) 💌</label><textarea class="input note" id="noteInput" maxlength="350" placeholder="e.g. You are not getting the aux cord. Also, I want dessert."></textarea></div><p class="helper">No dress code. No pressure. Just a plan we can change whenever we like.</p>`;
+      $('noteInput').value=data.note; $('noteInput').addEventListener('input',e=>data.note=e.target.value);
+    }
+  }
+  function clearError(){$('errorMessage').textContent='';}
+  $('stepContent').addEventListener('click',e=>{
+    const btn=e.target.closest('[data-kind]'); if(!btn)return;
+    const {kind,id}=btn.dataset;
+    if(kind==='vibe'){
+      data.vibe=id;
+      // Fill the suggested time only on first vibe choice or when changing vibes from a previous suggestion.
+      const previous=btn.parentElement.querySelector('[aria-pressed="true"]');
+      const previousItem=previous?item(previous.dataset.id,vibes):null;
+      if(!data.time || (previousItem && data.time===previousItem.time))data.time=item(id,vibes).time;
+      render();
+    }else{
+      const chosen=data[kind], limit=kind==='food'?2:3;
+      if(chosen.includes(id))data[kind]=chosen.filter(x=>x!==id);
+      else if(chosen.length<limit)chosen.push(id);
+      else {$('errorMessage').textContent=`Pick up to ${limit}, or unselect one first 💗`;return;}
+      render();
+    }
+  });
+  function nextStep(){
+    if(step===0 && (!data.date || !data.vibe)){
+      $('errorMessage').textContent='Choose a day and a main date idea first 💛'; return;
+    }
+    if(step===0 && data.date<localToday()){$('errorMessage').textContent='Let’s choose a future date 💛';return;}
+    if(step===1 && data.food.length===0){$('errorMessage').textContent='Choose at least one food ✨';return;}
+    if(step===3){makeTicket();show('ticketScreen');celebrate();return;}
+    step++;render();window.scrollTo({top:0,behavior:reducedMotion?'instant':'smooth'});
+  }
+  $('nextBtn').addEventListener('click',nextStep);
+  $('backBtn').addEventListener('click',()=>{if(step===0)show('proposalScreen');else{step--;render();}});
+  function labels(ids,collection){return ids.map(id=>{const x=item(id,collection);return x?`${x.icon} ${x.name}`:id;}).join(' • ');}
+  function ticketValues(){
+    const main=item(data.vibe,vibes);
+    return {
+      date:niceDate(data.date),
+      time:data.time?data.time:'We’ll decide together',
+      main:main?`${main.icon} ${main.name}`:'To be decided',
+      food:labels(data.food,foods),
+      activities:data.activities.length?labels(data.activities,activities):'No extra plans needed — one good date is enough.',
+      extras:data.extras.length?labels(data.extras,extras):'Just show up as yourself.',
+      note:data.note.trim()||'No extra requests. Just looking forward to spending time together. 💛'
+    };
+  }
+  function makeTicket(){
+    const t=ticketValues();
+    // textContent prevents visitor-written notes being interpreted as HTML.
+    $('ticketDate').textContent=t.date; $('ticketTime').textContent=t.time;
+    $('ticketMain').textContent=t.main; $('ticketFood').textContent=t.food;
+    $('ticketActivities').textContent=t.activities; $('ticketExtras').textContent=t.extras;
+    $('ticketNote').textContent=t.note;
+  }
+  function whatsappMessage(){
+    const t=ticketValues();
+    return [
+      '💌 *OPERATION 444: OFFICIAL DATE PASS*',
+      '', 'So... I said YES to an actual date 🥹✨', '',
+      `📅 *Date:* ${t.date}`,
+      `🕒 *Approx. time:* ${t.time}`,
+      `🎟️ *Main plan:* ${t.main}`,
+      `🍝 *Food:* ${t.food}`,
+      `✨ *Optional side quests:* ${t.activities}`,
+      `🎶 *Little extras:* ${t.extras}`,
+      `💭 *My note:* ${t.note}`,
+      '', '444 approved. Now we just have to make it happen 💛',
+      '(Everything is flexible — nothing is booked yet.)'
+    ].join('\n');
+  }
+  $('whatsappBtn').addEventListener('click',()=>{
+    // WhatsApp opens a prefilled message. The visitor must tap Send.
+    const url=`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage())}`;
+    window.open(url,'_blank','noopener,noreferrer');
+  });
+  $('printBtn').addEventListener('click',()=>window.print());
+  $('editBtn').addEventListener('click',()=>{step=0;render();show('plannerScreen');});
+  $('soundBtn').addEventListener('click',()=>{
+    soundOn=!soundOn; $('soundBtn').textContent=soundOn?'🔊 Sound on':'🔇 Sound off'; $('soundBtn').setAttribute('aria-pressed',String(soundOn));
+  });
+  function playSuccess(){
+    if(!soundOn)return;
+    try{
+      const Ctx=window.AudioContext||window.webkitAudioContext;if(!Ctx)return;
+      const audio=new Ctx(); audio.resume();
+      [523.25,659.25,783.99,1046.5].forEach((freq,i)=>{
+        const oscillator=audio.createOscillator(),gain=audio.createGain(),start=audio.currentTime+i*.11;
+        oscillator.type='sine';oscillator.frequency.value=freq;
+        gain.gain.setValueAtTime(0.0001,start);gain.gain.exponentialRampToValueAtTime(.065,start+.03);gain.gain.exponentialRampToValueAtTime(.0001,start+.35);
+        oscillator.connect(gain).connect(audio.destination);oscillator.start(start);oscillator.stop(start+.38);
+      });
+      setTimeout(()=>audio.close().catch(()=>{}),1400);
+    }catch(_error){/* Audio is optional, so the page still works if blocked. */}
+  }
+  const canvas=$('confetti'),ctx=canvas.getContext('2d');let confettiId=0;
+  function confetti(){
+    if(reducedMotion||!ctx)return;
+    if(confettiId)cancelAnimationFrame(confettiId);
+    const dpr=Math.min(window.devicePixelRatio||1,2),w=window.innerWidth,h=window.innerHeight;
+    canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);
+    const colors=['#f96cad','#ffc759','#9cdfe9','#9f79ca','#ff8c75','#80cbb6'];
+    const pieces=Array.from({length:155},()=>({x:w/2+(Math.random()-.5)*180,y:h*.32,dx:(Math.random()-.5)*14,dy:-Math.random()*11-3,gravity:.15+Math.random()*.13,spin:Math.random()*6,w:4+Math.random()*7,h:5+Math.random()*8,color:colors[Math.floor(Math.random()*colors.length)]}));
+    let frame=0;
+    function tick(){ctx.clearRect(0,0,w,h);pieces.forEach(p=>{p.x+=p.dx;p.y+=p.dy;p.dy+=p.gravity;p.dx*=.994;p.spin+=.08;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.spin);ctx.fillStyle=p.color;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();});if(++frame<210)confettiId=requestAnimationFrame(tick);else{ctx.clearRect(0,0,w,h);confettiId=0;}}
+    tick();
+  }
+  function hearts(){if(reducedMotion)return;for(let i=0;i<12;i++){
+    const heart=document.createElement('span');heart.className='heart-float';heart.textContent=['💗','💖','✨','🦈','🦒','💛'][i%6];heart.style.left=`${Math.random()*95}%`;heart.style.animationDelay=`${Math.random()*.6}s`;heart.style.setProperty('--drift',`${Math.round(Math.random()*170-85)}px`);document.body.appendChild(heart);setTimeout(()=>heart.remove(),4500);
+  }}
+  function celebrate(){playSuccess();confetti();hearts();}
+  $('yesBtn').addEventListener('click',()=>{step=0;render();show('plannerScreen');celebrate();});
+  $('realNoBtn').addEventListener('click',()=>show('declineScreen'));
+  $('resetBtn').addEventListener('click',()=>show('proposalScreen'));
+  const no=$('noBtn');
+  const pleas=[
+    'no 🙄','girl be serious 😭','404: button unavailable','I HAVE CARDIO 🏃','that is a bold mouse move',
+    'please respect my athleticism','nope, plot twist','speedrun: avoiding clicks','444 laps completed','I AM SPEED 🏃','okay this is getting personal 😭'
+  ];
+  function dodge(pointerX,pointerY){
+    if($('proposalScreen').hidden)return;
+    const now=Date.now();if(now-lastDodge<280)return;lastDodge=now;dodges++;
+    // Update the phrase before measuring: a longer joke must still fit on screen.
+    no.textContent=pleas[Math.min(dodges,pleas.length-1)];
+    const rect=no.getBoundingClientRect(),width=rect.width,height=rect.height;
+    const vw=window.innerWidth,vh=window.innerHeight,margin=12;
+    const px=Number.isFinite(pointerX)?pointerX:rect.x+width/2,py=Number.isFinite(pointerY)?pointerY:rect.y+height/2;
+    let dx=rect.left+width/2-px,dy=rect.top+height/2-py,mag=Math.hypot(dx,dy)||1;
+    dx/=mag;dy/=mag;
+    const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+    const candidates=[];
+    for(let i=0;i<20;i++){
+      const x=clamp(rect.left+dx*(155+i*23)+(Math.random()-.5)*260,margin,Math.max(margin,vw-width-margin));
+      const y=clamp(rect.top+dy*(120+i*17)+(Math.random()-.5)*240,margin,Math.max(margin,vh-height-margin));
+      candidates.push({x,y,dist:Math.hypot(x+width/2-px,y+height/2-py)});
+    }
+    const best=candidates.sort((a,b)=>b.dist-a.dist)[0];
+    // Move the button out of the animated section so fixed coordinates truly use the viewport.
+    if(no.parentElement!==document.body)document.body.appendChild(no);
+    no.style.position='fixed';no.style.left=`${best.x}px`;no.style.top=`${best.y}px`;
+    no.style.zIndex='70';
+    $('yesBtn').style.setProperty('--yes-scale',String(Math.min(1+Math.min(dodges,8)*.095,1.76)));
+    $('noComment').textContent=[`Attempt ${dodges}: the NO button has entered its escape era.`,`The button has apparently been training for this. 🏃`,`YES is becoming suspiciously confident. 💗`,`Behold: an extremely athletic button. 🏃`][Math.min(dodges-1,3)];
+  }
+  document.addEventListener('pointermove',e=>{
+    if(e.pointerType!=='mouse'||$('proposalScreen').hidden)return;
+    const r=no.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+    if(Math.hypot(e.clientX-cx,e.clientY-cy)<125)dodge(e.clientX,e.clientY);
+  },{passive:true});
+  no.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'||e.pointerType==='pen'||e.pointerType==='mouse'){
+    if(e.cancelable)e.preventDefault();dodge(e.clientX,e.clientY);
+  }});
+  no.addEventListener('click',e=>{if(e.detail===0)show('declineScreen');else dodge(e.clientX,e.clientY);});
+  window.addEventListener('resize',()=>{
+    if(no.style.position!=='fixed')return;
+    const r=no.getBoundingClientRect(),m=12;
+    no.style.left=`${Math.max(m,Math.min(r.left,window.innerWidth-r.width-m))}px`;
+    no.style.top=`${Math.max(m,Math.min(r.top,window.innerHeight-r.height-m))}px`;
+  });
+})();
+</script>
+</body>
+</html>
